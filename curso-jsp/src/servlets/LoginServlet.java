@@ -32,13 +32,21 @@ public class LoginServlet extends HttpServlet {
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
 			
-			if (daoLogin.validarLogin(login, senha)) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("acessoliberado.jsp");
-				dispatcher.forward(request, response);
+			if (login != null && !login.isEmpty() && senha != null && !senha.isEmpty()) {
+				if (daoLogin.validarLogin(login, senha)) {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("acessoliberado.jsp");
+					dispatcher.forward(request, response);
+				} else {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("acessonegado.jsp");
+					dispatcher.forward(request, response);
+				}
 			} else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("acessonegado.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+				request.setAttribute("msg", "ATENÇÃO! Favor informar o login e a senha!");
 				dispatcher.forward(request, response);
-			}
+			} 
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

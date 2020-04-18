@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="resources/css/estilo.css">	
 	</head>
 	<body>
+	<h3>${msg}</h3>
 	<div class="login-page">
 	  	<div class="form">
 			<form action="LoginServlet" method="post" class="login-form">
