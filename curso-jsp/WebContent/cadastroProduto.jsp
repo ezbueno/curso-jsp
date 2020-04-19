@@ -18,7 +18,7 @@
 	<form action="salvarProduto" method="post" id="formProduto" onsubmit="return validarCampos() ? true : false">
 		<ul class="form-style-1">
 			<li>
-				<table>
+				<table id="table-prod">
 					<tr>
 						<td>Código:</td>
 						<td><input type="text" readonly="readonly" id="id" name="id"

@@ -16,7 +16,7 @@
 	<h3>${msg}</h3>
 	<div class="login-page">
 	  	<div class="form">
-			<form action="LoginServlet" method="post" class="login-form">
+			<form action="LoginServlet" method="post" class="login-form" onsubmit="return validarLoginSenha() ? true : false">
 				Login:
 				<input type="text" id="login" name="login">
 				<br>
@@ -27,5 +27,22 @@
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript">
+		function validarLoginSenha() {
+			var login = document.getElementById("login").value;
+			var senha = document.getElementById("senha").value;
+			if (login == "" && senha == "") {
+				alert("ATENÇÃO! Favor informar o login e a senha!");
+				return false;
+			} else if (login == "" && senha != "") {
+				alert("ATENÇÃO! Favor informar o login!");
+				return false;
+			}  else if (login != "" && senha == "") {
+				alert("ATENÇÃO! Favor informar a senha!");
+				return false;
+			}
+			return true;
+		}
+	</script>
 	</body>
 </html>

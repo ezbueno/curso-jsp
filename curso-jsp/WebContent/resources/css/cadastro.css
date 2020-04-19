@@ -5,11 +5,9 @@
  max-width: 165px;
 }
 
-
 .minhatabela td {
  text-align: center;
 }
-
 
 .form-style-1 {
 	margin:10px auto;
@@ -17,18 +15,21 @@
 	padding: 20px 12px 10px 20px;
 	font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
+
 .form-style-1 li {
 	padding: 0;
 	display: block;
 	list-style: none;
 	margin: 10px 0 0 0;
 }
+
 .form-style-1 label{
 	margin:0 0 3px 0;
 	padding:0px;
 	display:block;
 	font-weight: bold;
 }
+
 .form-style-1 input[type=text],
 .form-style-1 input[type=password],
 .form-style-1 input[type=date],
@@ -52,6 +53,7 @@ select{
 	-o-transition: all 0.30s ease-in-out;
 	outline: none;	
 }
+
 .form-style-1 input[type=text]:focus,
 .form-style-1 input[type=password]:focus,
 .form-style-1 input[type=date]:focus,
@@ -68,6 +70,7 @@ select{
 	box-shadow: 0 0 8px #88D5E9;
 	border: 1px solid #88D5E9;
 }
+
 .form-style-1 .field-divided{
 	width: 49%;
 }
@@ -75,24 +78,29 @@ select{
 .form-style-1 .field-long{
 	width: 100%;
 }
+
 .form-style-1 .field-select{
 	width: 100%;
 }
+
 .form-style-1 .field-textarea{
 	height: 100px;
 }
+
 .form-style-1 input[type=submit], .form-style-1 input[type=button]{
 	background: #4B99AD;
 	padding: 8px 15px 8px 15px;
 	border: none;
 	color: #fff;
 }
+
 .form-style-1 input[type=submit]:hover, .form-style-1 input[type=button]:hover{
 	background: #4691A4;
 	box-shadow:none;
 	-moz-box-shadow:none;
 	-webkit-box-shadow:none;
 }
+
 .form-style-1 .required{
 	color:red;
 }
@@ -147,6 +155,11 @@ h3 {
 	color: green;
 }
 
+#table-prod {
+	text-align: center;
+	padding-left: 240px;
+}
+
 .botaoEnviar{
     width: 80px;
 	text-align: center;
@@ -158,10 +171,7 @@ strong {
   font-size: 16px;
 }
 
-
-
-#link a
-{
+#link a {
     padding-left: 50%;
     position: absolute;
     width: 140px;
