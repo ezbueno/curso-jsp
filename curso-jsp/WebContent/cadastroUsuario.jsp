@@ -34,37 +34,37 @@
 							
 						<td>Cep:</td>
 						<td><input type="text" id="cep" name="cep"
-							value="${user.cep}" class="field-long"></td>	
+							value="${user.cep}" maxlength="9" class="field-long"></td>	
 					</tr>
 
 					<tr>
 						<td>Login:</td>
 						<td><input type="text" id="login" name="login"
-							value="${user.login}" class="field-long"></td>
+							value="${user.login}" maxlength="10" class="field-long"></td>
 							
 						<td>Rua:</td>
 						<td><input type="text" id="rua" name="rua"
-							value="${user.rua}" class="field-long"></td>	
+							value="${user.rua}" maxlength="50" class="field-long"></td>	
 					</tr>
 					
 					<tr>
 						<td>Senha:</td>
 						<td><input type="password" id="senha" name="senha"
-							value="${user.senha}" class="field-long"></td>
+							value="${user.senha}" maxlength="10" class="field-long"></td>
 							
 						<td>Bairro:</td>
 						<td><input type="text" id="bairro" name="bairro"
-							value="${user.bairro}" class="field-long"></td>	
+							value="${user.bairro}" maxlength="50" class="field-long"></td>	
 					</tr>
 					 
 					<tr>
 						<td>Nome:</td>
 						<td><input type="text" id="nome" name="nome"
-							value="${user.nome}" class="field-long"></td>
+							value="${user.nome}" maxlength="50" class="field-long"></td>
 							
 						<td>Cidade:</td>
 						<td><input type="text" id="cidade" name="cidade"
-							value="${user.cidade}" class="field-long"></td>	
+							value="${user.cidade}" maxlength="50" class="field-long"></td>	
 					</tr>					
 					
 					<tr>
@@ -74,11 +74,11 @@
 							
 						<td>Estado:</td>
 						<td><input type="text" id="estado" name="estado"
-							value="${user.estado}" class="field-long"></td>	
+							value="${user.estado}" maxlength="50" class="field-long"></td>	
 							
 						<td>IBGE:</td>
 						<td><input type="text" id="ibge" name="ibge"
-							value="${user.ibge}" class="field-long"></td>
+							value="${user.ibge}" maxlength="20" class="field-long"></td>
 					</tr>			
 										
 					<tr>
@@ -97,13 +97,11 @@
 							<input type="text" style="display: none;" readonly="readonly" name="contentTypeCurriculoTemp" value="${user.contentTypeCurriculo}">
 						</td>							
 					</tr>
-					
-					<tr>
-						<td></td>
-						<td><input type="submit" value="Salvar" class="botaoEnviar"></td>
-						<td><input type="submit" value="Cancelar" onclick="document.getElementById('formUser').action='salvarUsuario?acao=reset'" class="botaoEnviar"></td>
-					</tr>
 				</table>
+				<div id="botao">
+					<input type="submit" value="Salvar" class="botaoEnviar" />
+					<input type="submit" value="Cancelar" onclick="document.getElementById('formUser').action='salvarUsuario?acao=reset'" class="botaoEnviar" />
+				</div>
 			</li>
 		</ul>
 	</form>

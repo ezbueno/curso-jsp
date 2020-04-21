@@ -160,16 +160,30 @@ h3 {
 	padding-left: 240px;
 }
 
-.botaoEnviar{
-    width: 80px;
-	text-align: center;
-	display: inline-block;
-    
+
+
+.table-inicial {
+	padding-left: 185px;
 }
 
 strong {
   font-size: 16px;
 }
+
+#botao { 
+ text-align: center;
+}
+
+.botaoEnviar{
+    width: 100px;
+    text-align: center;
+    padding: 15px 20px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    background-color: #FCC302;
+    font-size: 16px;
+}
+
 
 #link a {
     padding-left: 50%;

@@ -19,7 +19,7 @@
 	<form action="salvarTelefone" method="post" onsubmit="return validarCampos() ? true : false">
 		<ul class="form-style-1">
 			<li>
-				<table>
+				<table class="table-inicial">
 					<tr>
 						<td>Código:</td>
 						<td><input type="text" readonly="readonly" id="id" name="id" value="${userEscolhido.id}" class="field-long"></td>
@@ -27,24 +27,24 @@
 					</tr>
 					
 					<tr>
-						<td>Número:</td>
+						<td></td>
 						<td><input type="text" id="numero" name="numero"></td>
 						
 						<td>
-						<select id="tipo" name="tipo">
-							<option>Casa</option>
-							<option>Recado</option>
+						<select id="tipo" name="tipo" style="width: 185px">
 							<option>Celular</option>
+							<option>Casa</option>
+							<option>Trabalho</option>
+							<option>Recado</option>
+							<option>Outros</option>
 						</select>
 						</td>
 						
 					</tr>
-										
-					<tr>
-						<td></td>
-						<td><input type="submit" value="Salvar"></td>
-					</tr>
 				</table>
+				<div id="botao">
+					<input type="submit" value="Salvar" class="botaoEnviar" />
+				</div>
 			</li>
 		</ul>
 	</form>
