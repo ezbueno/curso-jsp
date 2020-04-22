@@ -9,6 +9,32 @@
 	<meta charset="UTF-8">
 	<title>Cadastro de Telefones</title>
 	<link rel="stylesheet" href="resources/css/cadastro.css">	
+	
+	<script type="text/javascript">
+		/* Máscaras ER */
+		function mascara(o,f){
+		    v_obj=o
+		    v_fun=f
+		    setTimeout("execmascara()",1)
+		}
+		function execmascara(){
+		    v_obj.value=v_fun(v_obj.value)
+		}
+		function mtel(v){
+		    v=v.replace(/\D/g,"");             //Remove tudo o que não é dígito
+		    v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+		    v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígito
+		    return v;
+		}
+		function id( el ){
+			return document.getElementById( el );
+		}
+		window.onload = function(){
+			id('numero').onkeyup = function(){
+				mascara( this, mtel );
+			}
+		}
+	</script>
 </head>
 <body>
 	<a href="acessoliberado.jsp"><img alt="Início" src="resources/img/inicio.png" width="30px" height="30px"></a>
@@ -28,7 +54,7 @@
 					
 					<tr>
 						<td></td>
-						<td><input type="text" id="numero" name="numero"></td>
+						<td><input type="text" id="numero" name="numero" maxlength="15"></td>
 						
 						<td>
 						<select id="tipo" name="tipo" style="width: 185px">
@@ -78,9 +104,10 @@
 			} else if (document.getElementById("tipo").value == "") {
 				alert("ATENÇÃO! Informe o tipo do telefone!");
 				return false;
+			}
 			return true;
 		}
-		</script>	
+		</script>			
 		<div id="link"><a id="back" href="salvarUsuario?acao=listartodos"><img alt="Voltar" src="resources/img/voltar.png" width="30px" height="30px"></a></div>	
 </body>
 </html>

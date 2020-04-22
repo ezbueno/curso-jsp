@@ -44,7 +44,7 @@ public class Produto extends HttpServlet {
 			
 			if (acao.equalsIgnoreCase("delete")) {
 				daoProduto.deletar(produto);
-				request.setAttribute("msg", "Produto excluído com sucesso!");
+				request.setAttribute("msgSalvarAtualizarExcluir", "Produto excluído com sucesso!");
 		
 				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listar());
@@ -92,8 +92,14 @@ public class Produto extends HttpServlet {
 			BeanProduto beanProduto = new BeanProduto();
 			beanProduto.setId(!id.isEmpty() ? Long.parseLong(id) : null);
 			beanProduto.setNome(nome);
-			beanProduto.setQuantidade(!quantidade.isEmpty() ? Double.parseDouble(quantidade) : 0);
-			beanProduto.setValor(!valor.isEmpty() ? Double.parseDouble(valor) : 0);
+			
+			if (quantidade != null && !quantidade.isEmpty() ) {
+				beanProduto.setQuantidade(Double.parseDouble(quantidade));
+			}
+			
+			if (valor != null && !valor.isEmpty()) {
+				beanProduto.setValor(Double.parseDouble(valor.replaceAll("\\,", ".")));
+			}
 			
 			try {
 				boolean insere = true;
@@ -111,13 +117,13 @@ public class Produto extends HttpServlet {
 					insere = false;
 				} else if (id == null || id.isEmpty() && daoProduto.validarNome(nome)) {
 					daoProduto.salvar(beanProduto);
-					request.setAttribute("msg", "Produto cadastrado com sucesso!");
+					request.setAttribute("msgSalvarAtualizarExcluir", "Produto cadastrado com sucesso!");
 				} else if (id != null && !id.isEmpty() && !daoProduto.validarNome(nome)) {
 					request.setAttribute("msg", "ATENÇÃO! Já existe um produto com o mesmo nome!");
 					insere = false;
 				} else if (id != null && !id.isEmpty() && daoProduto.validarNome(nome)) {
 					daoProduto.atualizar(beanProduto);
-					request.setAttribute("msg", "Produto editado com sucesso!");
+					request.setAttribute("msgSalvarAtualizarExcluir", "Produto editado com sucesso!");
 				}
 				
 				if (!insere) {

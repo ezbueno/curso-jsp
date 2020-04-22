@@ -15,6 +15,7 @@
 	<a href="index.jsp"><img alt="Sair" src="resources/img/sair.png" width="30px" height="30px"></a>
 	<h1>Cadastro de Produtos</h1>
 	<h3>${msg}</h3>
+	<h3 id="msgSalvarAtualizarExcluir">${msgSalvarAtualizarExcluir}</h3>
 	<form action="salvarProduto" method="post" id="formProduto" onsubmit="return validarCampos() ? true : false">
 		<ul class="form-style-1">
 			<li>
@@ -28,24 +29,24 @@
 					<tr>
 						<td>Nome:</td>
 						<td><input type="text" id="nome" name="nome"
-							value="${produto.nome}" class="field-long"></td>
+							value="${produto.nome}" maxlength="100" class="field-long"></td>
 					</tr>
 					
 					<tr>
 						<td>Quantidade:</td>
-						<td><input type="text" id="quantidade" name="quantidade"
-							value="${produto.quantidade}" class="field-long"></td>
+						<td><input type="number" id="quantidade" name="quantidade"
+							value="${produto.quantidade}" maxlength="10" class="field-long"></td>
 					</tr>
 					 
 					<tr>
 						<td>Valor:</td>
 						<td><input type="text" id="valor" name="valor"
-							value="${produto.valor}" class="field-long"></td>
+							value="${produto.valor}" maxlength="12" class="field-long"></td>
 					</tr>					
 										
 					<tr>
 						<td></td>
-						<td><input type="submit" value="Salvar"> <input type="submit" value="Cancelar" onclick="document.getElementById('formProduto').action='salvarProduto?acao=reset'"></td>
+						<td><input type="submit" value="Salvar" style="width: 80px"> <input type="submit" value="Cancelar" onclick="document.getElementById('formProduto').action='salvarProduto?acao=reset'" style="width: 80px"></td>
 					</tr>
 				</table>
 			</li>
