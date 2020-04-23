@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Cadastro de Produtos</title>
+<script src="resources/js/jquery.min.js" type="text/javascript"></script>
+<script src="resources/js/jquery.maskMoney.js" type="text/javascript"></script>
 <link rel="stylesheet" href="resources/css/cadastro.css">
 </head>
 <body>
@@ -28,8 +30,15 @@
 
 					<tr>
 						<td>Nome:</td>
-						<td><input type="text" id="nome" name="nome"
-							value="${produto.nome}" maxlength="100" class="field-long"></td>
+							<c:if test="${produto.nome == null}">
+								<td><input type="text" id="nome" name="nome"
+									value="${produto.nome}" maxlength="100" class="field-long"></td>
+							</c:if>
+					
+							<c:if test="${produto.nome != null}">
+								<td><input type="text" id="nome" name="nome" readonly="readonly"
+									value="${produto.nome}" maxlength="100" class="field-long"></td>
+							</c:if>
 					</tr>
 					
 					<tr>
@@ -72,9 +81,9 @@
 					</td>
 					<td style="width: 150px"><c:out value="${produto.quantidade}"></c:out>
 					<td style="width: 150px"><c:out value="${produto.valor}"></c:out>
-					<td><a href="salvarProduto?acao=delete&produto=${produto.id}"><img alt="Excluir" src="resources/img/excluir.png" title="Excluir" width="20px" height="20px"></a></td>
+					<td><a href="salvarProduto?acao=delete&produto=${produto.id}"><img alt="Excluir" src="resources/img/excluir.png" title="Excluir" width="20px" height="20px"></a></td>					
 					<td><a href="salvarProduto?acao=editar&produto=${produto.id}"><img alt="Editar" src="resources/img/editar.png" title="Editar" width="20px" height="20px"></a></td>
-				</tr>
+				</tr>				
 			</c:forEach>
 	</table>
 	<script type="text/javascript">
@@ -91,6 +100,19 @@
 			}
 			return true;
 		}
+	</script>
+	
+	<script type="text/javascript">
+	    $(function(){
+	        $("#valor").maskMoney();
+	    })
+    </script>
+    
+    <script type="text/javascript">
+		$(function(){
+		 $("#demo4").maskMoney({symbol:'R$ ', 
+			showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
+		 })
 	</script>
 </body>
 </html>

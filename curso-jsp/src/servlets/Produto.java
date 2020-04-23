@@ -2,7 +2,6 @@ package servlets;
 
 import java.io.IOException;
 
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -98,7 +97,7 @@ public class Produto extends HttpServlet {
 			}
 			
 			if (valor != null && !valor.isEmpty()) {
-				beanProduto.setValor(Double.parseDouble(valor.replaceAll("\\,", ".")));
+				beanProduto.setValor(Double.parseDouble(valor.replaceAll("\\,", "")));
 			}
 			
 			try {
@@ -114,14 +113,18 @@ public class Produto extends HttpServlet {
 					insere = false;
 				} else if (id == null || id.isEmpty() && !daoProduto.validarNome(nome)) {
 					request.setAttribute("msg", "ATENÇÃO! Já existe um produto com o mesmo nome!");
-					insere = false;
+					insere = true;
 				} else if (id == null || id.isEmpty() && daoProduto.validarNome(nome)) {
 					daoProduto.salvar(beanProduto);
 					request.setAttribute("msgSalvarAtualizarExcluir", "Produto cadastrado com sucesso!");
-				} else if (id != null && !id.isEmpty() && !daoProduto.validarNome(nome)) {
+				} 
+				
+				/*else if (id != null && !id.isEmpty() && !daoProduto.validarNome(nome)) {
 					request.setAttribute("msg", "ATENÇÃO! Já existe um produto com o mesmo nome!");
 					insere = false;
-				} else if (id != null && !id.isEmpty() && daoProduto.validarNome(nome)) {
+				}*/
+				
+				else if (id != null && !id.isEmpty() && nome != null && !nome.isEmpty()) {
 					daoProduto.atualizar(beanProduto);
 					request.setAttribute("msgSalvarAtualizarExcluir", "Produto editado com sucesso!");
 				}
