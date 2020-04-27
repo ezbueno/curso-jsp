@@ -29,8 +29,15 @@
 				<table class="minhatabela">
 					<tr>
 						<td>Código:</td>
-						<td><input type="text" readonly="readonly" id="id" name="id"
-							value="${user.id}" class="field-long"></td>
+						<c:if test="${user.id == null}">
+							<td><input type="text" readonly="readonly" id="id" name="id" style="background-color: #DCDCDC" onclick="alert('Campo de preenchimento automático.')"
+								value="${user.id}" class="field-long"></td>
+						</c:if>
+						
+						<c:if test="${user.id != null}">
+							<td><input type="text" readonly="readonly" id="id" name="id" style="background-color: #DCDCDC" onclick="alert('Não é permitido alterar o código do usuário.')"
+								value="${user.id}" class="field-long"></td>
+						</c:if>
 							
 						<td>Cep:</td>
 						<td><input type="text" id="cep" name="cep"

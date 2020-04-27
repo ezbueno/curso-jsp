@@ -41,20 +41,24 @@ public class Produto extends HttpServlet {
 			String acao = request.getParameter("acao");
 			String produto = request.getParameter("produto");
 			
-			if (acao.equalsIgnoreCase("delete")) {
+			if (acao != null && acao.equalsIgnoreCase("delete")) {
 				daoProduto.deletar(produto);
 				request.setAttribute("msgSalvarAtualizarExcluir", "Produto excluído com sucesso!");
 		
 				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listar());
 				view.forward(request, response);
-			} else if (acao.equalsIgnoreCase("editar")) {
+			} else if (acao != null && acao.equalsIgnoreCase("editar")) {
 				BeanProduto beanProduto = daoProduto.consultar(produto);
 								
 				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produto", beanProduto);
 				view.forward(request, response);
-			} else if (acao.equalsIgnoreCase("listartodosprodutos")) {
+			} else if (acao != null && acao.equalsIgnoreCase("listartodosprodutos")) {
+				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
+				request.setAttribute("produtos", daoProduto.listar());
+				view.forward(request, response);
+			} else {
 				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listar());
 				view.forward(request, response);

@@ -48,7 +48,7 @@
 				<table class="table-inicial">
 					<tr>
 						<td>Código:</td>
-						<td><input type="text" readonly="readonly" id="id" name="id" value="${userEscolhido.id}" class="field-long"></td>
+						<td><input type="text" readonly="readonly" id="id" name="id" value="${userEscolhido.id}" class="field-long" style="background-color: #DCDCDC" onclick="alert('Não é permitido alterar o código do usuário.')"></td>
 						<td><input type="text" readonly="readonly" id="nome" name="nome" value="${userEscolhido.nome}" class="field-long"></td>
 					</tr>
 					

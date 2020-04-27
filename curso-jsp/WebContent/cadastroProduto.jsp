@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -24,8 +25,15 @@
 				<table id="table-prod">
 					<tr>
 						<td>Código:</td>
-						<td><input type="text" readonly="readonly" id="id" name="id"
-							value="${produto.id}" class="field-long"></td>
+						<c:if test="${produto.id == null}">
+							<td><input type="text" readonly="readonly" id="id" name="id" style="background-color: #DCDCDC" onclick="alert('Campo de preenchimento automático.')"
+								value="${produto.id}" class="field-long"></td>
+						</c:if>
+						
+						<c:if test="${produto.id != null}">
+							<td><input type="text" readonly="readonly" id="id" name="id" style="background-color: #DCDCDC" onclick="alert('Não é permitido alterar o código do produto.')"
+								value="${produto.id}" class="field-long"></td>
+						</c:if>
 					</tr>
 
 					<tr>
@@ -36,21 +44,35 @@
 							</c:if>
 					
 							<c:if test="${produto.nome != null}">
-								<td><input type="text" id="nome" name="nome" readonly="readonly"
+								<td><input type="text" id="nome" name="nome" readonly="readonly" style="background-color: #DCDCDC" onclick="alert('Não é permitido alterar o nome do produto.')"
 									value="${produto.nome}" maxlength="100" class="field-long"></td>
 							</c:if>
 					</tr>
 					
 					<tr>
 						<td>Quantidade:</td>
-						<td><input type="number" id="quantidade" name="quantidade"
-							value="${produto.quantidade}" maxlength="10" class="field-long"></td>
+							<c:if test="${produto.quantidade == null}">
+								<td><input type="number" id=quantidade name="quantidade"
+									value="${produto.quantidade}" maxlength="10" class="field-long"></td>
+							</c:if>
+	
+							<c:if test="${produto.quantidade != null}">
+								<td><input type="number" id=quantidade name="quantidade"
+									value="<fmt:formatNumber value="${produto.quantidade}"></fmt:formatNumber>" maxlength="10" class="field-long"></td>								
+							</c:if>
 					</tr>
 					 
 					<tr>
 						<td>Valor:</td>
-						<td><input type="text" id="valor" name="valor"
-							value="${produto.valor}" maxlength="12" class="field-long"></td>
+							<c:if test="${produto.valor == null}">
+							<td><input type="text" id="valor" name="valor"
+								value="${produto.valor}" maxlength="12" class="field-long"></td>
+							</c:if>
+							
+							<c:if test="${produto.valor != null}">
+							<td><input type="text" id="valor" name="valor"
+								value="<fmt:formatNumber value="${produto.valor}"></fmt:formatNumber>" maxlength="12" class="field-long"></td>
+							</c:if>
 					</tr>					
 										
 					<tr>
@@ -77,10 +99,9 @@
 			<c:forEach items="${produtos}" var="produto">
 				<tr>
 					<td style="width: 150px"><c:out value="${produto.id}"></c:out></td>
-					<td style="width: 150px"><c:out value="${produto.nome}"></c:out>
-					</td>
-					<td style="width: 150px"><c:out value="${produto.quantidade}"></c:out>
-					<td style="width: 150px"><c:out value="${produto.valor}"></c:out>
+					<td style="width: 150px"><c:out value="${produto.nome}"></c:out></td>
+					<td style="width: 150px"><fmt:formatNumber type="number" value="${produto.quantidade}"></fmt:formatNumber></td>
+					<td style="width: 150px"><fmt:formatNumber type="number" value="${produto.valor}"></fmt:formatNumber></td>
 					<td><a href="salvarProduto?acao=delete&produto=${produto.id}"><img alt="Excluir" src="resources/img/excluir.png" title="Excluir" width="20px" height="20px"></a></td>					
 					<td><a href="salvarProduto?acao=editar&produto=${produto.id}"><img alt="Editar" src="resources/img/editar.png" title="Editar" width="20px" height="20px"></a></td>
 				</tr>				
