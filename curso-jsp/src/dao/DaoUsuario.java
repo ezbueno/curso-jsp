@@ -20,7 +20,7 @@ public class DaoUsuario {
 	
 	public void salvar(BeanUsuario beanUsuario) {
 		try {
-			String sql = "insert into usuario(login, senha, nome, telefone, cep, rua, bairro, cidade, estado, ibge, fotobase64, contenttype, curriculobase64, contenttypecurriculo) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into usuario(login, senha, nome, telefone, cep, rua, bairro, cidade, estado, ibge, fotobase64, contenttype, curriculobase64, contenttypecurriculo, fotoMiniaturaBase64) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement insert = connection.prepareStatement(sql);
 			insert.setString(1, beanUsuario.getLogin());
 			insert.setString(2, beanUsuario.getSenha());
@@ -36,6 +36,7 @@ public class DaoUsuario {
 			insert.setString(12, beanUsuario.getContentType());
 			insert.setString(13, beanUsuario.getCurriculoBase64());
 			insert.setString(14, beanUsuario.getContentTypeCurriculo());
+			insert.setString(15, beanUsuario.getFotoMiniaturaBase64());
 			insert.execute();
 			connection.commit();
 		} catch (Exception e) {
@@ -123,7 +124,7 @@ public class DaoUsuario {
 
 	public void atualizar(BeanUsuario beanUsuario) {
 		try {
-			String sql = "update usuario set login = ?, senha = ?, nome = ?, telefone = ?, cep = ?, rua = ?, bairro = ?, cidade = ?, estado = ?, ibge = ?, fotobase64 = ?, contenttype = ?, curriculobase64 = ?, contenttypecurriculo = ? where id = " + beanUsuario.getId();
+			String sql = "update usuario set login = ?, senha = ?, nome = ?, telefone = ?, cep = ?, rua = ?, bairro = ?, cidade = ?, estado = ?, ibge = ?, fotobase64 = ?, contenttype = ?, curriculobase64 = ?, contenttypecurriculo = ?, fotoMiniaturaBase64 = ? where id = " + beanUsuario.getId();
 			 PreparedStatement update = connection.prepareStatement(sql);
 			 update.setString(1, beanUsuario.getLogin());
 			 update.setString(2, beanUsuario.getSenha());
@@ -139,6 +140,7 @@ public class DaoUsuario {
 			 update.setString(12, beanUsuario.getContentType());
 			 update.setString(13, beanUsuario.getCurriculoBase64());
 			 update.setString(14, beanUsuario.getContentTypeCurriculo());
+			 update.setString(15, beanUsuario.getFotoMiniaturaBase64());
 			 update.executeUpdate();
 			 connection.commit();
 		} catch (Exception e) {

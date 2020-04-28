@@ -1,10 +1,14 @@
 package servlets;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import javax.imageio.ImageIO;
 
 /*
 import java.util.ArrayList;
@@ -19,6 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import javax.xml.bind.DatatypeConverter;
 
 /*
 import org.apache.commons.fileupload.FileItem;
@@ -209,11 +214,38 @@ public class Usuario extends HttpServlet {
 					Part imagemFoto = request.getPart("foto");
 				
 					if (imagemFoto != null && imagemFoto.getInputStream().available() > 0) {
+						
+						byte[] bytesImagem = converterStreamParaByte(imagemFoto.getInputStream());
+						
 						new Base64();
-						String fotoBase64 = Base64.encodeBase64String(converterStreamParaByte(imagemFoto.getInputStream()));
+						String fotoBase64 = Base64.encodeBase64String(bytesImagem);
 						
 						beanUsuario.setFotoBase64(fotoBase64);
 						beanUsuario.setContentType(imagemFoto.getContentType());
+						
+						/* Início - Imagem em miniatura */
+						
+						/* Transforma em um BufferedImage */
+						BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(bytesImagem));
+						
+						/* Pega o tipo da imagem */
+						int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
+						
+						/* Cria a imagem em miniatura */
+						BufferedImage resizedImage = new BufferedImage(100, 100, type);
+						Graphics2D graphics2d = resizedImage.createGraphics();
+						graphics2d.drawImage(resizedImage, 0, 0, 100, 100, null);
+						
+						/* Escreve a imagem novamente */
+						ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+						ImageIO.write(resizedImage, "png", byteArrayOutputStream);
+						
+						String miniaturaBase64 = "data:image/png;base64," + DatatypeConverter.printBase64Binary(byteArrayOutputStream.toByteArray());
+						
+						beanUsuario.setFotoMiniaturaBase64(miniaturaBase64);
+						
+						/* Fim - Imagem em miniatura */
+						
 					} else {
 						beanUsuario.setFotoBase64(request.getParameter("fotoTemp"));
 						beanUsuario.setContentType(request.getParameter("contentTypeTemp"));
