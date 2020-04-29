@@ -140,11 +140,11 @@
 					<td style="width: 280px"><c:out value="${user.id}"></c:out></td>
 					<td style="width: 280px"><c:out value="${user.login}"></c:out></td>
 					
-					<c:if test="${user.fotoBase64.isEmpty() == false}">
-						<td style="width: 280px"><a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img src='<c:out value="${user.tempFotoUser}"></c:out>' alt="Imagem" title="Foto do Usuário" width="30px" height="30px"></a></td>
+					<c:if test="${user.fotoMiniaturaBase64.isEmpty() == false}">
+						<td style="width: 280px"><a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img src='<c:out value="${user.fotoMiniaturaBase64}"></c:out>' alt="Imagem" title="Foto do Usuário" width="30px" height="30px"></a></td>
 					</c:if>
 					
-					<c:if test="${user.fotoBase64.isEmpty() == true}">
+					<c:if test="${user.fotoMiniaturaBase64.isEmpty() == true}">
 						<td style="width: 280px"><img src="resources/img/no-user.png" alt="Imagem" title="Usuário sem foto" width="30px" height="30px"></td>
 					</c:if>
 					

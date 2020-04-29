@@ -52,7 +52,7 @@ public class DaoUsuario {
 	public List<BeanUsuario> listar()  throws Exception {
 		List<BeanUsuario> listarUsuario = new ArrayList<BeanUsuario>();
 		
-		String sql = "select * from usuario";
+		String sql = "select * from usuario where login <> 'admin'";
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
 		
@@ -69,7 +69,8 @@ public class DaoUsuario {
 			beanUsuario.setCidade(resultSet.getString("cidade"));
 			beanUsuario.setEstado(resultSet.getString("estado"));
 			beanUsuario.setIbge(resultSet.getString("ibge"));
-			beanUsuario.setFotoBase64(resultSet.getString("fotobase64"));
+			//beanUsuario.setFotoBase64(resultSet.getString("fotobase64"));
+			beanUsuario.setFotoMiniaturaBase64(resultSet.getString("fotoMiniaturaBase64"));
 			beanUsuario.setContentType(resultSet.getString("contenttype"));
 			beanUsuario.setCurriculoBase64(resultSet.getString("curriculobase64"));
 			beanUsuario.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));
@@ -80,7 +81,7 @@ public class DaoUsuario {
 	
 	public void deletar(String id) {
 		try {
-			String sql = "delete from usuario where id = '" + id + "'";
+			String sql = "delete from usuario where id = '" + id + "' and login <> 'admin'";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.execute();
 			connection.commit();
@@ -95,7 +96,7 @@ public class DaoUsuario {
 	}
 	
 	public BeanUsuario consultar(String id) throws Exception {
-		String sql = "select * from usuario where id  = '" + id + "'";
+		String sql = "select * from usuario where id  = '" + id + "' and login <> 'admin'";
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
 		
@@ -113,6 +114,7 @@ public class DaoUsuario {
 			beanUsuario.setEstado(resultSet.getString("estado"));
 			beanUsuario.setIbge(resultSet.getString("ibge"));
 			beanUsuario.setFotoBase64(resultSet.getString("fotobase64"));
+			beanUsuario.setFotoMiniaturaBase64(resultSet.getString("fotoMiniaturaBase64"));
 			beanUsuario.setContentType(resultSet.getString("contenttype"));
 			beanUsuario.setCurriculoBase64(resultSet.getString("curriculobase64"));
 			beanUsuario.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));

@@ -213,12 +213,9 @@ public class Usuario extends HttpServlet {
 					
 					Part imagemFoto = request.getPart("foto");
 				
-					if (imagemFoto != null && imagemFoto.getInputStream().available() > 0) {
-						
-						byte[] bytesImagem = converterStreamParaByte(imagemFoto.getInputStream());
-						
+					if (imagemFoto != null && imagemFoto.getInputStream().available() > 0) {						
 						new Base64();
-						String fotoBase64 = Base64.encodeBase64String(bytesImagem);
+						String fotoBase64 = Base64.encodeBase64String(converterStreamParaByte(imagemFoto.getInputStream()));
 						
 						beanUsuario.setFotoBase64(fotoBase64);
 						beanUsuario.setContentType(imagemFoto.getContentType());
@@ -226,7 +223,9 @@ public class Usuario extends HttpServlet {
 						/* Início - Imagem em miniatura */
 						
 						/* Transforma em um BufferedImage */
-						BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(bytesImagem));
+						new Base64();
+						byte[] imageByteDecode = Base64.decodeBase64(fotoBase64);
+						BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageByteDecode));
 						
 						/* Pega o tipo da imagem */
 						int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
@@ -234,7 +233,8 @@ public class Usuario extends HttpServlet {
 						/* Cria a imagem em miniatura */
 						BufferedImage resizedImage = new BufferedImage(100, 100, type);
 						Graphics2D graphics2d = resizedImage.createGraphics();
-						graphics2d.drawImage(resizedImage, 0, 0, 100, 100, null);
+						graphics2d.drawImage(bufferedImage, 0, 0, 100, 100, null);
+						graphics2d.dispose();
 						
 						/* Escreve a imagem novamente */
 						ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
