@@ -114,7 +114,7 @@
 	</form>
 
 	<table class="tabela-usuarios">
-	<caption><strong>Usuários cadastrados</strong></caption>
+	<caption><strong>Lista de Usuários</strong></caption>
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -140,12 +140,12 @@
 					<td style="width: 280px"><c:out value="${user.id}"></c:out></td>
 					<td style="width: 280px"><c:out value="${user.login}"></c:out></td>
 					
-					<c:if test="${user.fotoMiniaturaBase64.isEmpty() == false}">
+					<c:if test="${user.fotoMiniaturaBase64 != null}">
 						<td style="width: 280px"><a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img src='<c:out value="${user.fotoMiniaturaBase64}"></c:out>' alt="Imagem" title="Foto do Usuário" width="30px" height="30px"></a></td>
 					</c:if>
 					
-					<c:if test="${user.fotoMiniaturaBase64.isEmpty() == true}">
-						<td style="width: 280px"><img src="resources/img/no-user.png" alt="Imagem" title="Usuário sem foto" width="30px" height="30px"></td>
+					<c:if test="${user.fotoMiniaturaBase64 == null}">
+						<td style="width: 280px"><img src="resources/img/no-user.png" alt="Imagem" title="Usuário sem foto" width="30px" height="30px"></td>						
 					</c:if>
 					
 					<c:if test="${user.curriculoBase64.isEmpty() == false}">

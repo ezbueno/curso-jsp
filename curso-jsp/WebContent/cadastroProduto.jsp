@@ -84,7 +84,7 @@
 		</ul>		
 	</form>
 	<table class="tabela-produtos">
-	<caption><strong>Produtos cadastrados</strong></caption>
+	<caption><strong>Lista de Produtos</strong></caption>
 		<thead>
 			<tr>
 				<th>ID</th>
