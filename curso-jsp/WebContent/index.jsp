@@ -44,5 +44,9 @@
 			return true;
 		}
 	</script>
+		<h3 style="color: black">Projeto Didático</h3>
+		<h4 style="padding-left: 595px">JSP + Servlet + JDBC</h4>
+		<span style="padding-left: 622px"><strong>Login: admin</strong></span>
+		<span style="padding-left: 622px"><strong>Senha: admin</strong></span>
 	</body>
 </html>

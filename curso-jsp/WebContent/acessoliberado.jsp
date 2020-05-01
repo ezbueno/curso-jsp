@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="resources/css/acessoliberado.css">
 	</head>
 	<body>
-		<h1>Bem-Vindo ao Sistema</h1>
+		<h1>Bem-Vindo ao Sistema!</h1>
 		<table class="centro">
 		<tr>
 			<td>

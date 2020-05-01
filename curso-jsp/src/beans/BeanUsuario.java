@@ -19,6 +19,8 @@ public class BeanUsuario {
 	private String curriculoBase64;
 	private String contentTypeCurriculo;
 	private String tempFotoUser;
+	private boolean atualizarImagem = true;
+	private boolean atualizarPDF = true;
 	
 	public Long getId() {
 		return id;
@@ -120,4 +122,16 @@ public class BeanUsuario {
 		tempFotoUser = "data:" + contentType + ";base64," + fotoBase64;
 		return tempFotoUser;
 	}
+	public boolean isAtualizarImagem() {
+		return atualizarImagem;
+	}
+	public void setAtualizarImagem(boolean atualizarImagem) {
+		this.atualizarImagem = atualizarImagem;
+	}
+	public boolean isAtualizarPDF() {
+		return atualizarPDF;
+	}
+	public void setAtualizarPDF(boolean atualizarPDF) {
+		this.atualizarPDF = atualizarPDF;
+	}	
 }

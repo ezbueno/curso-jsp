@@ -247,8 +247,11 @@ public class Usuario extends HttpServlet {
 						/* Fim - Imagem em miniatura */
 						
 					} else {
+						/*
 						beanUsuario.setFotoBase64(request.getParameter("fotoTemp"));
 						beanUsuario.setContentType(request.getParameter("contentTypeTemp"));
+						*/
+						beanUsuario.setAtualizarImagem(false);
 					}
 					
 					Part curriculo = request.getPart("curriculo");
@@ -260,8 +263,11 @@ public class Usuario extends HttpServlet {
 						beanUsuario.setCurriculoBase64(curriculoBase64);
 						beanUsuario.setContentTypeCurriculo(curriculo.getContentType());
 					} else {
+						/*
 						beanUsuario.setCurriculoBase64(request.getParameter("curriculoTemp"));
 						beanUsuario.setContentTypeCurriculo(request.getParameter("contentTypeCurriculoTemp"));
+						*/
+						beanUsuario.setAtualizarPDF(false);
 					}
 				}
 				/* Fim - File Upload de imagens e PDF */

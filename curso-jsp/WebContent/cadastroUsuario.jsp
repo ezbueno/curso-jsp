@@ -91,8 +91,8 @@
 					<tr>
 						<td>Foto:</td>
 						<td><input type="file" name="foto">
-							<input type="text" style="display: none;" readonly="readonly" name="fotoTemp" value="${user.fotoBase64}">
-							<input type="text" style="display: none;" readonly="readonly" name="contentTypeTemp" value="${user.contentType}">
+						<!-- <input type="text" style="display: none;" readonly="readonly" name="fotoTemp" value="${user.fotoBase64}">
+							<input type="text" style="display: none;" readonly="readonly" name="contentTypeTemp" value="${user.contentType}"> -->
 						</td>	
 												
 					</tr>
@@ -100,8 +100,8 @@
 					<tr>
 						<td>Currículo:</td>
 						<td><input type="file" name="curriculo">
-							<input type="text" style="display: none;" readonly="readonly" name="curriculoTemp" value="${user.curriculoBase64}">
-							<input type="text" style="display: none;" readonly="readonly" name="contentTypeCurriculoTemp" value="${user.contentTypeCurriculo}">
+							<!-- <input type="text" style="display: none;" readonly="readonly" name="curriculoTemp" value="${user.curriculoBase64}">
+							<input type="text" style="display: none;" readonly="readonly" name="contentTypeCurriculoTemp" value="${user.contentTypeCurriculo}"> -->
 						</td>							
 					</tr>
 				</table>
@@ -148,11 +148,11 @@
 						<td style="width: 280px"><img src="resources/img/no-user.png" alt="Imagem" title="Usuário sem foto" width="30px" height="30px"></td>						
 					</c:if>
 					
-					<c:if test="${user.curriculoBase64.isEmpty() == false}">
+					<c:if test="${user.curriculoBase64 != null}">
 						<td style="width: 280px"><a href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img src="resources/img/pdf.png" alt="Currículo" title="Currículo do usuário" width="30px" height="30px"></a></td>
 					</c:if>
 					
-					<c:if test="${user.curriculoBase64.isEmpty() == true}">
+					<c:if test="${user.curriculoBase64 == null}">
 						<td style="width: 280px"><img src="resources/img/no-pdf.png" alt="Currículo" title="Usuário sem currículo" width="30px" height="30px"></td>
 					</c:if>
 										
