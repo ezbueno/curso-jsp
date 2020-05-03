@@ -41,29 +41,33 @@ public class Telefone extends HttpServlet {
 		
 		try {
 			String acao = request.getParameter("acao");
-			
-				if (acao.equalsIgnoreCase("addFone")) {
-					String user = request.getParameter("user");
-					BeanUsuario beanUsuario = daoUsuario.consultar(user);
-					request.getSession().setAttribute("userEscolhido", beanUsuario);
-					request.setAttribute("userEscolhido", beanUsuario);		
-					
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroTelefone.jsp");
-					request.setAttribute("telefones", daoTelefone.listar(beanUsuario.getId()));
-					dispatcher.forward(request, response);
-				} else if (acao.equalsIgnoreCase("deleteFone")) {
-					String fone = request.getParameter("foneId");
-					daoTelefone.deletar(fone);
-					
-					BeanUsuario beanUsuario = (BeanUsuario) request.getSession().getAttribute("userEscolhido");
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroTelefone.jsp");
-					request.setAttribute("telefones", daoTelefone.listar(beanUsuario.getId()));
-					request.setAttribute("msgSalvarAtualizarExcluir", "Telefone excluído com sucesso!");
-					dispatcher.forward(request, response);
-				} else if (acao.equalsIgnoreCase("listartodos")) {
+			String user = request.getParameter("user");
+				
+				if (user != null) {
+					if (acao.equalsIgnoreCase("addFone")) {
+						BeanUsuario beanUsuario = daoUsuario.consultar(user);
+						request.getSession().setAttribute("userEscolhido", beanUsuario);
+						request.setAttribute("userEscolhido", beanUsuario);		
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroTelefone.jsp");
+						request.setAttribute("telefones", daoTelefone.listar(beanUsuario.getId()));
+						dispatcher.forward(request, response);
+					} else if (acao.equalsIgnoreCase("deleteFone")) {
+						String fone = request.getParameter("foneId");
+						daoTelefone.deletar(fone);
+						BeanUsuario beanUsuario = (BeanUsuario) request.getSession().getAttribute("userEscolhido");
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroTelefone.jsp");
+						request.setAttribute("telefones", daoTelefone.listar(beanUsuario.getId()));
+						request.setAttribute("msgSalvarAtualizarExcluir", "Telefone excluído com sucesso!");
+						dispatcher.forward(request, response);
+					} else if (acao.equalsIgnoreCase("listartodos")) {
+						RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp");
+						request.setAttribute("usuarios", daoUsuario.listar());
+						view.forward(request, response);	
+					}
+				} else {
 					RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp");
 					request.setAttribute("usuarios", daoUsuario.listar());
-					view.forward(request, response);	
+					view.forward(request, response);
 				}
 		} catch (Exception e) {
 			e.printStackTrace(); 

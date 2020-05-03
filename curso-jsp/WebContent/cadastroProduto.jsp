@@ -52,13 +52,13 @@
 					<tr>
 						<td>Quantidade:</td>
 							<c:if test="${produto.quantidade == null}">
-								<td><input type="number" id=quantidade name="quantidade"
-									value="${produto.quantidade}" maxlength="10" class="field-long"></td>
+								<td><input type="number" id=quantidade name="quantidade" min="1" max="500"
+									value="${produto.quantidade}" class="field-long"></td>
 							</c:if>
 	
 							<c:if test="${produto.quantidade != null}">
-								<td><input type="number" id=quantidade name="quantidade"
-									value="<fmt:formatNumber value="${produto.quantidade}"></fmt:formatNumber>" maxlength="10" class="field-long"></td>								
+								<td><input type="number" id=quantidade name="quantidade" min="1" max="500"
+									value="<fmt:formatNumber value="${produto.quantidade}"></fmt:formatNumber>" class="field-long"></td>								
 							</c:if>
 					</tr>
 					 
@@ -66,12 +66,12 @@
 						<td>Valor:</td>
 							<c:if test="${produto.valor == null}">
 							<td><input type="text" id="valor" name="valor"
-								value="${produto.valor}" maxlength="12" class="field-long"></td>
+								value="${produto.valor}" maxlength="10" class="field-long"></td>
 							</c:if>
 							
 							<c:if test="${produto.valor != null}">
 							<td><input type="text" id="valor" name="valor"
-								value="<fmt:formatNumber value="${produto.valor}"></fmt:formatNumber>" maxlength="12" class="field-long"></td>
+								value="<fmt:formatNumber value="${produto.valor}"></fmt:formatNumber>" maxlength="10" class="field-long"></td>
 							</c:if>
 					</tr>					
 										
@@ -129,11 +129,11 @@
 	    })
     </script>
     
-    <script type="text/javascript">
+   <!--  <script type="text/javascript">
 		$(function(){
 		 $("#demo4").maskMoney({symbol:'R$ ', 
 			showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
 		 })
-	</script>
+	</script> -->
 </body>
 </html>

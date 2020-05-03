@@ -62,11 +62,10 @@ public class Produto extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listar());
 				view.forward(request, response);
-			}
+			}			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	/**
@@ -91,7 +90,7 @@ public class Produto extends HttpServlet {
 			String nome = request.getParameter("nome");
 			String quantidade = request.getParameter("quantidade");
 			String valor = request.getParameter("valor");
-			
+						
 			BeanProduto beanProduto = new BeanProduto();
 			beanProduto.setId(!id.isEmpty() ? Long.parseLong(id) : null);
 			beanProduto.setNome(nome);
@@ -140,7 +139,6 @@ public class Produto extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listar());
 				view.forward(request, response);
-				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

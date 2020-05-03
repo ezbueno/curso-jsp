@@ -6,6 +6,7 @@ public class BeanProduto {
 	private String nome;
 	private double quantidade;
 	private double valor;
+	private boolean atualizarValor = true;
 	
 	public Long getId() {
 		return id;
@@ -33,5 +34,11 @@ public class BeanProduto {
 	}
 	public String getValorEmTexto() {
 		return Double.toString(valor).replace('.', ',');
+	}
+	public boolean isAtualizarValor() {
+		return atualizarValor;
+	}
+	public void setAtualizarValor(boolean atualizarValor) {
+		this.atualizarValor = atualizarValor;
 	}
 }

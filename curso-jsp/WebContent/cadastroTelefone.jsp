@@ -76,7 +76,7 @@
 	</form>
 
 	<table class="tabela-telefones">
-	<caption><strong>Telefones cadastrados</strong></caption>
+	<caption><strong>Lista de Telefones</strong></caption>
 		<thead>
 			<tr>
 				<th>ID</th>

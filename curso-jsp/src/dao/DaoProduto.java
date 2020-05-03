@@ -104,13 +104,13 @@ public class DaoProduto {
 
 	public void atualizar(BeanProduto beanProduto) {
 		try {
-			String sql = "update produto set nome = ?, quantidade = ?, valor = ? where id = " + beanProduto.getId();
-			 PreparedStatement update = connection.prepareStatement(sql);
-			 update.setString(1, beanProduto.getNome());
-			 update.setDouble(2, beanProduto.getQuantidade());
-			 update.setDouble(3, beanProduto.getValor());			 
-			 update.executeUpdate();
-			 connection.commit();
+			String sql = " update produto set nome = ?, quantidade = ?, valor = ? where id = " + beanProduto.getId();
+			PreparedStatement update = connection.prepareStatement(sql.toString());
+			update.setString(1, beanProduto.getNome());
+			update.setDouble(2, beanProduto.getQuantidade());
+			update.setDouble(3, beanProduto.getValor());
+			update.executeUpdate();
+			connection.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
