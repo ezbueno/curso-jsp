@@ -177,7 +177,7 @@ public class Usuario extends HttpServlet {
 			String estado = request.getParameter("estado");
 			String ibge = request.getParameter("ibge");
 			
-			BeanUsuario beanUsuario = new BeanUsuario();
+			BeanUsuario beanUsuario = new BeanUsuario();			
 			beanUsuario.setId((id != null && !id.isEmpty()) ? Long.parseLong(id) : null);
 			beanUsuario.setLogin(login);
 			beanUsuario.setSenha(senha);
@@ -189,6 +189,14 @@ public class Usuario extends HttpServlet {
 			beanUsuario.setCidade(cidade);
 			beanUsuario.setEstado(estado);
 			beanUsuario.setIbge(ibge);
+			
+			String ativo = request.getParameter("ativo");
+			
+			if (verificarStatus(ativo)) {
+				beanUsuario.setAtivo(true);
+			} else {
+				beanUsuario.setAtivo(false);
+			}
 
 			boolean insere = true;
 			
@@ -342,4 +350,11 @@ public class Usuario extends HttpServlet {
 		return byteArrayOutputStream.toByteArray();
 	}
 	
+	private boolean verificarStatus(String ativo) {
+		if (ativo != null && ativo.equalsIgnoreCase("on")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

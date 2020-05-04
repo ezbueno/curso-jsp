@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import beans.BeanUsuario;
 import connection.SingleConnection;
 
 public class DaoLogin {
@@ -24,7 +25,23 @@ public class DaoLogin {
 		} else {
 			return false;
 		}
-		
 	}
 	
+	public String buscarNome(String login) {
+		try {
+			String sql = "select nome from usuario where login = '" + login + "'";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				BeanUsuario beanUsuario = new BeanUsuario();
+				beanUsuario.setNome(resultSet.getString("nome"));
+				
+				return beanUsuario.getNome();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

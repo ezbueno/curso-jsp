@@ -21,6 +21,7 @@ public class BeanUsuario {
 	private String tempFotoUser;
 	private boolean atualizarImagem = true;
 	private boolean atualizarPDF = true;
+	private boolean ativo;
 	
 	public Long getId() {
 		return id;
@@ -133,5 +134,11 @@ public class BeanUsuario {
 	}
 	public void setAtualizarPDF(boolean atualizarPDF) {
 		this.atualizarPDF = atualizarPDF;
-	}	
+	}
+	public boolean isAtivo() {
+		return ativo;
+	}
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
 }

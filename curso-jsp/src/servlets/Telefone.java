@@ -43,7 +43,7 @@ public class Telefone extends HttpServlet {
 			String acao = request.getParameter("acao");
 			String user = request.getParameter("user");
 				
-				if (user != null) {
+				if (acao != null) {
 					if (acao.equalsIgnoreCase("addFone")) {
 						BeanUsuario beanUsuario = daoUsuario.consultar(user);
 						request.getSession().setAttribute("userEscolhido", beanUsuario);

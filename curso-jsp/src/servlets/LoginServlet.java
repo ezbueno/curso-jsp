@@ -44,9 +44,7 @@ public class LoginServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 				request.setAttribute("msg", "ATENÇÃO! Favor informar o login e a senha!");
 				dispatcher.forward(request, response);
-			} 
-			
-			
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

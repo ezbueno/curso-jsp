@@ -1,3 +1,4 @@
+<%@page import="beans.BeanUsuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -18,8 +19,8 @@
 	
 </head>
 <body>
-	<a href="acessoliberado.jsp"><img alt="Início" src="resources/img/inicio.png" width="30px" height="30px"></a>
-	<a href="index.jsp"><img alt="Sair" src="resources/img/sair.png" width="30px" height="30px"></a>
+	<a href="acessoliberado.jsp"><img alt="Início" src="resources/img/inicio.png" width="30px" height="30px" id="botao-inicio"></a>
+	<a href="index.jsp"><img alt="Sair" src="resources/img/sair.png" width="30px" height="30px" onclick="return confirm('Deseja sair do sistema?')" id="botao-sair"></a>
 	<h1>Cadastro de Usuários</h1>
 	<h3>${msg}</h3>
 	<h3 id="msgSalvarAtualizarExcluir">${msgSalvarAtualizarExcluir}</h3>
@@ -31,47 +32,47 @@
 						<td>Código:</td>
 						<c:if test="${user.id == null}">
 							<td><input type="text" readonly="readonly" id="id" name="id" style="background-color: #DCDCDC" onclick="alert('Campo de preenchimento automático.')"
-								value="${user.id}" class="field-long"></td>
+								style="width: 300px" value="${user.id}" class="field-long"></td>
 						</c:if>
 						
 						<c:if test="${user.id != null}">
 							<td><input type="text" readonly="readonly" id="id" name="id" style="background-color: #DCDCDC" onclick="alert('Não é permitido alterar o código do usuário.')"
-								value="${user.id}" class="field-long"></td>
+								style="width: 300px" value="${user.id}" class="field-long"></td>
 						</c:if>
 							
 						<td>Cep:</td>
 						<td><input type="text" id="cep" name="cep"
-							value="${user.cep}" maxlength="9" class="field-long"></td>	
+							style="width: 300px" value="${user.cep}" maxlength="9" class="field-long"></td>	
 					</tr>
 
 					<tr>
 						<td>Login:</td>
 						<td><input type="text" id="login" name="login"
-							value="${user.login}" maxlength="10" class="field-long"></td>
+							style="width: 300px" value="${user.login}" maxlength="10" class="field-long"></td>
 							
 						<td>Rua:</td>
 						<td><input type="text" id="rua" name="rua"
-							value="${user.rua}" maxlength="50" class="field-long"></td>	
+							style="width: 300px" value="${user.rua}" maxlength="50" class="field-long"></td>	
 					</tr>
 					
 					<tr>
 						<td>Senha:</td>
 						<td><input type="password" id="senha" name="senha"
-							value="${user.senha}" maxlength="10" class="field-long"></td>
+							style="width: 300px" value="${user.senha}" maxlength="10" class="field-long"></td>
 							
 						<td>Bairro:</td>
 						<td><input type="text" id="bairro" name="bairro"
-							value="${user.bairro}" maxlength="50" class="field-long"></td>	
+							style="width: 300px" value="${user.bairro}" maxlength="50" class="field-long"></td>	
 					</tr>
 					 
 					<tr>
 						<td>Nome:</td>
 						<td><input type="text" id="nome" name="nome"
-							value="${user.nome}" maxlength="50" class="field-long"></td>
+							style="width: 300px" value="${user.nome}" maxlength="50" class="field-long"></td>
 							
 						<td>Cidade:</td>
 						<td><input type="text" id="cidade" name="cidade"
-							value="${user.cidade}" maxlength="50" class="field-long"></td>	
+							style="width: 300px" value="${user.cidade}" maxlength="50" class="field-long"></td>	
 					</tr>					
 					
 					<tr>
@@ -81,30 +82,34 @@
 							
 						<td>Estado:</td>
 						<td><input type="text" id="estado" name="estado"
-							value="${user.estado}" maxlength="50" class="field-long"></td>	
+							style="width: 300px" value="${user.estado}" maxlength="50" class="field-long"></td>	
 							
 						<td>IBGE:</td>
 						<td><input type="text" id="ibge" name="ibge"
-							value="${user.ibge}" maxlength="20" class="field-long"></td>
-					</tr>			
-										
-					<tr>
+							style="width: 300px" value="${user.ibge}" maxlength="20" class="field-long"></td>
+					</tr>
+															
+					<tr>					
 						<td>Foto:</td>
-						<td><input type="file" name="foto">
+						<td><input type="file" name="foto" style="width: 300px">
 						<!-- <input type="text" style="display: none;" readonly="readonly" name="fotoTemp" value="${user.fotoBase64}">
 							<input type="text" style="display: none;" readonly="readonly" name="contentTypeTemp" value="${user.contentType}"> -->
-						</td>	
-												
-					</tr>
-					
-					<tr>
+						
 						<td>Currículo:</td>
-						<td><input type="file" name="curriculo">
+						<td><input type="file" name="curriculo" style="width: 300px">
 							<!-- <input type="text" style="display: none;" readonly="readonly" name="curriculoTemp" value="${user.curriculoBase64}">
 							<input type="text" style="display: none;" readonly="readonly" name="contentTypeCurriculoTemp" value="${user.contentTypeCurriculo}"> -->
-						</td>							
+						</td>
 					</tr>
 				</table>
+				
+				<table>
+					<tr>
+						<td id="user-ativo" style="width: 53px">Ativo:</td>
+						<td><input type="checkbox" name="ativo" id="ativo" ${user.ativo ? 'checked' : ''} />	
+					</tr>
+				</table>
+						
 				<div id="botao">
 					<input type="submit" value="Salvar" class="botaoEnviar" />
 					<input type="submit" value="Cancelar" onclick="document.getElementById('formUser').action='salvarUsuario?acao=reset'" class="botaoEnviar" />
@@ -165,7 +170,7 @@
 					<td style="width: 280px"><c:out value="${user.cidade}"></c:out>
 					<td style="width: 280px"><c:out value="${user.estado}"></c:out>
 					<td style="width: 280px"><c:out value="${user.ibge}"></c:out>
-					<td style="width: 280px"><a href="salvarUsuario?acao=delete&user=${user.id}"><img alt="Excluir" src="resources/img/excluir.png" title="Excluir" width="22px" height="22px"></a></td>
+					<td style="width: 280px"><a href="salvarUsuario?acao=delete&user=${user.id}"><img alt="Excluir" src="resources/img/excluir.png" title="Excluir" width="22px" height="22px" onclick=" return confirm('Deseja realizar a exclusão?')"></a></td>
 					<td style="width: 280px"><a href="salvarUsuario?acao=editar&user=${user.id}"><img alt="Editar" src="resources/img/editar.png" title="Editar" width="22px" height="22px"></a></td>
 				</tr>
 			</c:forEach>

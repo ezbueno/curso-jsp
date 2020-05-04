@@ -14,8 +14,8 @@
 <link rel="stylesheet" href="resources/css/cadastro.css">
 </head>
 <body>
-	<a href="acessoliberado.jsp"><img alt="Início" src="resources/img/inicio.png" width="30px" height="30px"></a>
-	<a href="index.jsp"><img alt="Sair" src="resources/img/sair.png" width="30px" height="30px"></a>
+	<a href="acessoliberado.jsp"><img alt="Início" src="resources/img/inicio.png" width="30px" height="30px" id="botao-inicio"></a>
+	<a href="index.jsp"><img alt="Sair" src="resources/img/sair.png" width="30px" height="30px" onclick="return confirm('Deseja sair do sistema?')" id="botao-sair"></a>
 	<h1>Cadastro de Produtos</h1>
 	<h3>${msg}</h3>
 	<h3 id="msgSalvarAtualizarExcluir">${msgSalvarAtualizarExcluir}</h3>
@@ -102,7 +102,7 @@
 					<td style="width: 150px"><c:out value="${produto.nome}"></c:out></td>
 					<td style="width: 150px"><fmt:formatNumber type="number" value="${produto.quantidade}"></fmt:formatNumber></td>
 					<td style="width: 150px"><fmt:formatNumber type="number" value="${produto.valor}"></fmt:formatNumber></td>
-					<td><a href="salvarProduto?acao=delete&produto=${produto.id}"><img alt="Excluir" src="resources/img/excluir.png" title="Excluir" width="20px" height="20px"></a></td>					
+					<td><a href="salvarProduto?acao=delete&produto=${produto.id}"><img alt="Excluir" src="resources/img/excluir.png" title="Excluir" width="20px" height="20px" onclick=" return confirm('Deseja realizar a exclusão?')"></a></td>					
 					<td><a href="salvarProduto?acao=editar&produto=${produto.id}"><img alt="Editar" src="resources/img/editar.png" title="Editar" width="20px" height="20px"></a></td>
 				</tr>				
 			</c:forEach>
