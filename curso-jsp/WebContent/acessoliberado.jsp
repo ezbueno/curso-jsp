@@ -1,3 +1,6 @@
+<%@page import="servlets.LoginServlet"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
+<%@page import="beans.BeanUsuario"%>
 <%@page import="dao.DaoLogin"%>
 <jsp:useBean id="cadastro" class="beans.BeanUsuario" type="beans.BeanUsuario" scope="page"></jsp:useBean>
 
@@ -15,17 +18,20 @@
 	</head>
 	<body>
 		<a href="index.jsp"><img alt="Sair" src="resources/img/sair.png" width="30px" height="30px" id="botao-sair" onclick="return confirm('Deseja sair do sistema?')"></a>
-		<%
-			DaoLogin daoLogin = new DaoLogin();
-			String login = request.getParameter("login");
-			String nome = daoLogin.buscarNome(login);
-			session.setAttribute("nome", nome);
 			
-		%>	
-			
-		<h1>Bem-Vindo ao Sistema, 
-			<% out.print(session.getAttribute("nome") + "!");%>
-		</h1>
+		<h3>Bem-Vindo ao Sistema, 
+			<%
+				String login = request.getParameter("login");
+					if (login != null) {
+						DaoLogin daoLogin = new DaoLogin();	
+						String nome = daoLogin.buscarNome(login);
+						session.setAttribute("nome", nome);
+						out.print(nome + "!");	
+					} else {
+						out.print(session.getAttribute("nome") + "!");
+					}
+			%>
+		</h3>
 		
 		<table class="centro">
 		<tr>

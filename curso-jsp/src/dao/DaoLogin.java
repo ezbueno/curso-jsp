@@ -35,7 +35,8 @@ public class DaoLogin {
 			
 			if (resultSet.next()) {
 				BeanUsuario beanUsuario = new BeanUsuario();
-				beanUsuario.setNome(resultSet.getString("nome"));
+				String nome = resultSet.getString("nome");
+				beanUsuario.setNome(nome);
 				
 				return beanUsuario.getNome();
 			}

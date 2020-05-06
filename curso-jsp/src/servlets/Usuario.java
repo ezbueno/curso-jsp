@@ -89,9 +89,7 @@ public class Usuario extends HttpServlet {
 				view.forward(request, response);
 			} else if (acao != null && acao.equalsIgnoreCase("download")) {
 				BeanUsuario beanUsuario = daoUsuario.consultar(user);
-				if (beanUsuario != null) {
-					
-					
+				if (beanUsuario != null) {					
 					if (tipo.equalsIgnoreCase("imagem")) {
 						response.setHeader("Content-Disposition", "attachment;filename=imagem." + beanUsuario.getContentType().split("\\/")[1]);
 						
