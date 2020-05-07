@@ -17,8 +17,12 @@
 		<link rel="stylesheet" href="resources/css/acessoliberado.css">
 	</head>
 	<body>
-		<a href="index.jsp"><img alt="Sair" src="resources/img/sair.png" width="30px" height="30px" id="botao-sair" onclick="return confirm('Deseja sair do sistema?')"></a>
-			
+		
+
+		<header>
+    		<div class="header"><a href="index.jsp"><img alt="Sair" src="resources/img/logout.png" width="30px" height="30px" id="botao-sair" onclick="return confirm('Deseja sair do sistema?')"></a></div>
+ 		</header>
+ 		
 		<h3>Bem-Vindo ao Sistema, 
 			<%
 				String login = request.getParameter("login");

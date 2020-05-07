@@ -19,8 +19,10 @@
 	
 </head>
 <body>
-	<a href="acessoliberado.jsp"><img alt="Início" src="resources/img/inicio.png" width="30px" height="30px" id="botao-inicio"></a>
-	<a href="index.jsp"><img alt="Sair" src="resources/img/sair.png" width="30px" height="30px" onclick="return confirm('Deseja sair do sistema?')" id="botao-sair"></a>
+	<header class="header">
+		<a href="acessoliberado.jsp"><img alt="Início" src="resources/img/home.png" width="30px" height="30px" id="botao-inicio"></a>
+		<a href="index.jsp"><img alt="Sair" src="resources/img/logout.png" width="30px" height="30px" onclick="return confirm('Deseja sair do sistema?')" id="botao-sair"></a>
+	</header>
 	<h1>Cadastro de Usuários</h1>
 	<h3>${msg}</h3>
 	<h3 id="msgSalvarAtualizarExcluir">${msgSalvarAtualizarExcluir}</h3>
@@ -99,17 +101,37 @@
 						<td><input type="file" name="curriculo" style="width: 300px">
 							<!-- <input type="text" style="display: none;" readonly="readonly" name="curriculoTemp" value="${user.curriculoBase64}">
 							<input type="text" style="display: none;" readonly="readonly" name="contentTypeCurriculoTemp" value="${user.contentTypeCurriculo}"> -->
-						</td>
-					</tr>
+						</td>						
+					</tr>													
 				</table>
+				
 				
 				<table>
 					<tr>
 						<td id="user-ativo" style="width: 53px">Ativo:</td>
-						<td><input type="checkbox" name="ativo" id="ativo" ${user.ativo ? 'checked' : ''} />	
+						<td><input type="checkbox" name="ativo" id="ativo" ${user.ativo ? 'checked' : ''} />
+						
+						<td style="width: 294px"></td>
+						<td id="sexo-user" style="width: 67px">Sexo:</td>
+						<td>
+							<input type="radio" name="sexo" value="masculino" ${user.sexo eq 'masculino' ? 'checked' : ''}/>Masculino
+							<input type="radio" name="sexo" value="feminino" ${user.sexo eq 'feminino' ? 'checked' : ''}/>Feminino
+						</td>
+							<%-- Outra maneira de comparar o sexo: 
+								if (request.getAttribute("user") != null) {
+									BeanUsuario beanUsuario = (BeanUsuario) request.getAttribute("user");
+									if (beanUsuario.getSexo().equalsIgnoreCase("masculino")) {
+										out.print(" ");
+										out.print("checked=\"checked\"");
+										out.print(" ");
+									}
+								}
+							--%>			
 					</tr>
 				</table>
-						
+				
+				<br>
+				
 				<div id="botao">
 					<input type="submit" value="Salvar" class="botaoEnviar" />
 					<input type="submit" value="Cancelar" onclick="document.getElementById('formUser').action='salvarUsuario?acao=reset'" class="botaoEnviar" />
@@ -176,86 +198,86 @@
 			</c:forEach>
 	</table>	
 		<script type="text/javascript">
-		function validarCampos() {
-			if (document.getElementById("login").value == "") {
-				alert("ATENÇÃO! Informe o login!");
-				return false;
-			} else if (document.getElementById("senha").value == "") {
-				alert("ATENÇÃO! Informe a senha!");
-				return false;
-			} else if (document.getElementById("nome").value == "") {
-				alert("ATENÇÃO! Informe o nome!");
-				return false;
-			} else if (document.getElementById("telefone").value == "") {
-				alert("ATENÇÃO! Informe o telefone!");
-				return false;
+			function validarCampos() {
+				if (document.getElementById("login").value == "") {
+					alert("ATENÇÃO! Informe o login!");
+					return false;
+				} else if (document.getElementById("senha").value == "") {
+					alert("ATENÇÃO! Informe a senha!");
+					return false;
+				} else if (document.getElementById("nome").value == "") {
+					alert("ATENÇÃO! Informe o nome!");
+					return false;
+				} else if (document.getElementById("telefone").value == "") {
+					alert("ATENÇÃO! Informe o telefone!");
+					return false;
+				}
+				return true;
 			}
-			return true;
-		}
-		
-		$(document).ready(function() {
-
-            function limpa_formulário_cep() {
-                // Limpa valores do formulário de cep.
-                $("#rua").val("");
-                $("#bairro").val("");
-                $("#cidade").val("");
-                $("#estado").val("");
-                $("#ibge").val("");
-            }
-            
-            //Quando o campo cep perde o foco.
-            $("#cep").blur(function() {
-
-                //Nova variável "cep" somente com dígitos.
-                var cep = $(this).val().replace(/\D/g, '');
-
-                //Verifica se campo cep possui valor informado.
-                if (cep != "") {
-
-                    //Expressão regular para validar o CEP.
-                    var validacep = /^[0-9]{8}$/;
-
-                    //Valida o formato do CEP.
-                    if(validacep.test(cep)) {
-
-                        //Preenche os campos com "..." enquanto consulta webservice.
-                        $("#rua").val("...");
-                        $("#bairro").val("...");
-                        $("#cidade").val("...");
-                        $("#estado").val("...");
-                        $("#ibge").val("...");
-
-                        //Consulta o webservice viacep.com.br/
-                        $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
-
-                            if (!("erro" in dados)) {
-                                //Atualiza os campos com os valores da consulta.
-                                $("#rua").val(dados.logradouro);
-                                $("#bairro").val(dados.bairro);
-                                $("#cidade").val(dados.localidade);
-                                $("#estado").val(dados.uf);
-                                $("#ibge").val(dados.ibge);
-                            } //end if.
-                            else {
-                                //CEP pesquisado não foi encontrado.
-                                limpa_formulário_cep();
-                                alert("CEP não encontrado.");
-                            }
-                        });
-                    } //end if.
-                    else {
-                        //cep é inválido.
-                        limpa_formulário_cep();
-                        alert("Formato de CEP inválido.");
-                    }
-                } //end if.
-                else {
-                    //cep sem valor, limpa formulário.
-                    limpa_formulário_cep();
-                }
-            });
-        });		
+			
+			$(document).ready(function() {
+	
+	            function limpa_formulário_cep() {
+	                // Limpa valores do formulário de cep.
+	                $("#rua").val("");
+	                $("#bairro").val("");
+	                $("#cidade").val("");
+	                $("#estado").val("");
+	                $("#ibge").val("");
+	            }
+	            
+	            //Quando o campo cep perde o foco.
+	            $("#cep").blur(function() {
+	
+	                //Nova variável "cep" somente com dígitos.
+	                var cep = $(this).val().replace(/\D/g, '');
+	
+	                //Verifica se campo cep possui valor informado.
+	                if (cep != "") {
+	
+	                    //Expressão regular para validar o CEP.
+	                    var validacep = /^[0-9]{8}$/;
+	
+	                    //Valida o formato do CEP.
+	                    if(validacep.test(cep)) {
+	
+	                        //Preenche os campos com "..." enquanto consulta webservice.
+	                        $("#rua").val("...");
+	                        $("#bairro").val("...");
+	                        $("#cidade").val("...");
+	                        $("#estado").val("...");
+	                        $("#ibge").val("...");
+	
+	                        //Consulta o webservice viacep.com.br/
+	                        $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+	
+	                            if (!("erro" in dados)) {
+	                                //Atualiza os campos com os valores da consulta.
+	                                $("#rua").val(dados.logradouro);
+	                                $("#bairro").val(dados.bairro);
+	                                $("#cidade").val(dados.localidade);
+	                                $("#estado").val(dados.uf);
+	                                $("#ibge").val(dados.ibge);
+	                            } //end if.
+	                            else {
+	                                //CEP pesquisado não foi encontrado.
+	                                limpa_formulário_cep();
+	                                alert("CEP não encontrado.");
+	                            }
+	                        });
+	                    } //end if.
+	                    else {
+	                        //cep é inválido.
+	                        limpa_formulário_cep();
+	                        alert("Formato de CEP inválido.");
+	                    }
+	                } //end if.
+	                else {
+	                    //cep sem valor, limpa formulário.
+	                    limpa_formulário_cep();
+	                }
+	            });
+	        });
 		</script>
 </body>
 </html>

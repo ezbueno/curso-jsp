@@ -22,6 +22,7 @@ public class BeanUsuario {
 	private boolean atualizarImagem = true;
 	private boolean atualizarPDF = true;
 	private boolean ativo;
+	private String sexo;
 	
 	public Long getId() {
 		return id;
@@ -140,5 +141,11 @@ public class BeanUsuario {
 	}
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 }

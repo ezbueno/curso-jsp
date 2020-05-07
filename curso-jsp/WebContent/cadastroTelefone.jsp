@@ -37,8 +37,10 @@
 	</script>
 </head>
 <body>
-	<a href="acessoliberado.jsp"><img alt="Início" src="resources/img/inicio.png" width="30px" height="30px" id="botao-inicio"></a>
-	<a href="index.jsp"><img alt="Sair" src="resources/img/sair.png" width="30px" height="30px" onclick="return confirm('Deseja sair do sistema?')" id="botao-sair"></a>
+	<header class="header">
+		<a href="acessoliberado.jsp"><img alt="Início" src="resources/img/home.png" width="30px" height="30px" id="botao-inicio"></a>
+		<a href="index.jsp"><img alt="Sair" src="resources/img/logout.png" width="30px" height="30px" onclick="return confirm('Deseja sair do sistema?')" id="botao-sair"></a>
+	</header>
 	<h1>Cadastro de Telefones</h1>
 	<h3>${msg}</h3>
 	<h3 id="msgSalvarAtualizarExcluir">${msgSalvarAtualizarExcluir}</h3>
