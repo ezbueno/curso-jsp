@@ -175,6 +175,7 @@ public class Usuario extends HttpServlet {
 			String estado = request.getParameter("estado");
 			String ibge = request.getParameter("ibge");
 			String sexo = request.getParameter("sexo");
+			String perfil = request.getParameter("perfil");
 			
 			BeanUsuario beanUsuario = new BeanUsuario();			
 			beanUsuario.setId((id != null && !id.isEmpty()) ? Long.parseLong(id) : null);
@@ -189,6 +190,7 @@ public class Usuario extends HttpServlet {
 			beanUsuario.setEstado(estado);
 			beanUsuario.setIbge(ibge);
 			beanUsuario.setSexo(sexo);
+			beanUsuario.setPerfil(perfil);
 			
 			String ativo = request.getParameter("ativo");
 			

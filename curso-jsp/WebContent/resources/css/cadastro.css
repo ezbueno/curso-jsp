@@ -104,6 +104,20 @@ select{
 	color:red;
 }
 
+.form-style-2 input[type=submit]{
+	background: #4B99AD;
+	padding: 8px 15px 8px 15px;
+	border: none;
+	color: #fff;
+}
+
+.form-style-2 input[type=submit]:hover{
+	background: #4691A4;
+	box-shadow:none;
+	-moz-box-shadow:none;
+	-webkit-box-shadow:none;
+}
+
 .tabela-usuarios {
 	background: #f5f5f5;
 	border-collapse: separate;
@@ -173,10 +187,29 @@ strong {
  text-align: center;
 }
 
-.botaoEnviar{
+.botaoSalvar{
     width: 100px;
     text-align: center;
     padding: 15px 20px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    background-color: #FCC302;
+    font-size: 16px;
+}
+
+.botaoCancelar{
+    width: 100px;
+    text-align: center;
+    padding: 15px 20px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    background-color: #FCC302;
+    font-size: 16px;
+}
+
+.botaoPesquisar{
+    width: 100px;
+    text-align: center;
     border: 1px solid #eee;
     border-radius: 6px;
     background-color: #FCC302;
@@ -211,6 +244,14 @@ strong {
 }
 
 #user-ativo {
+	padding: 8px 10px;
+    background-color: #f5f5f5;
+    font-size: 14px;
+ 	max-width: 480px;
+ 	text-align: center;
+}
+
+#perfil-user {
 	padding: 8px 10px;
     background-color: #f5f5f5;
     font-size: 14px;

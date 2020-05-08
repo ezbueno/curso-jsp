@@ -21,8 +21,8 @@ public class DaoUsuario {
 	public void salvar(BeanUsuario beanUsuario) {
 		try {
 			String sql = "insert into usuario(login, senha, nome, telefone, cep, rua, bairro, cidade, estado, ibge, "
-					+ "fotobase64, contenttype, curriculobase64, contenttypecurriculo, fotoMiniaturaBase64, ativo, sexo) "
-					+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "fotobase64, contenttype, curriculobase64, contenttypecurriculo, fotoMiniaturaBase64, ativo, sexo, perfil) "
+					+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement insert = connection.prepareStatement(sql);
 			insert.setString(1, beanUsuario.getLogin());
 			insert.setString(2, beanUsuario.getSenha());
@@ -41,6 +41,7 @@ public class DaoUsuario {
 			insert.setString(15, beanUsuario.getFotoMiniaturaBase64());
 			insert.setBoolean(16, beanUsuario.isAtivo());
 			insert.setString(17, beanUsuario.getSexo());
+			insert.setString(18,  beanUsuario.getPerfil());
 			insert.execute();
 			connection.commit();
 		} catch (Exception e) {
@@ -53,10 +54,18 @@ public class DaoUsuario {
 		}
 	}
 	
-	public List<BeanUsuario> listar()  throws Exception {
-		List<BeanUsuario> listarUsuario = new ArrayList<BeanUsuario>();
-		
+	public List<BeanUsuario> listar(String descricaoConsulta) throws SQLException {
+		String sql = "select * from usuario where login <> 'admin' and nome ilike '%" + descricaoConsulta + "%'";
+		return consultarUsuarios(sql);
+	}
+	
+	public List<BeanUsuario> listar() throws Exception {		
 		String sql = "select * from usuario where login <> 'admin'";
+		return consultarUsuarios(sql);
+	}
+
+	private List<BeanUsuario> consultarUsuarios(String sql) throws SQLException {
+		List<BeanUsuario> listarUsuario = new ArrayList<BeanUsuario>();
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
 		
@@ -80,6 +89,7 @@ public class DaoUsuario {
 			beanUsuario.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));
 			beanUsuario.setAtivo(resultSet.getBoolean("ativo"));
 			beanUsuario.setSexo(resultSet.getString("sexo"));
+			beanUsuario.setPerfil(resultSet.getString("perfil"));
 			listarUsuario.add(beanUsuario);
 		}
 		return listarUsuario;
@@ -126,6 +136,7 @@ public class DaoUsuario {
 			beanUsuario.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));
 			beanUsuario.setAtivo(resultSet.getBoolean("ativo"));
 			beanUsuario.setSexo(resultSet.getString("sexo"));
+			beanUsuario.setPerfil(resultSet.getString("perfil"));
 			
 			return beanUsuario;
 		}
@@ -138,7 +149,7 @@ public class DaoUsuario {
 				sql.append(" update usuario set login = ? ");
 				sql.append(", senha = ?, nome = ?, telefone = ? ");
 				sql.append(", cep = ?, rua = ?, bairro = ? ");
-				sql.append(", cidade = ?, estado = ?, ibge = ? , ativo = ?, sexo = ? ");
+				sql.append(", cidade = ?, estado = ?, ibge = ? , ativo = ?, sexo = ? , perfil = ? ");
 				
 				if (beanUsuario.isAtualizarImagem()) {
 					sql.append(", fotobase64 = ?, contenttype = ? ");					
@@ -167,26 +178,27 @@ public class DaoUsuario {
 				 update.setString(10, beanUsuario.getIbge());
 				 update.setBoolean(11, beanUsuario.isAtivo());
 				 update.setString(12, beanUsuario.getSexo());
+				 update.setString(13, beanUsuario.getPerfil());
 				 
 				 if (beanUsuario.isAtualizarImagem()) {
-					 update.setString(13, beanUsuario.getFotoBase64());
-					 update.setString(14, beanUsuario.getContentType());				 
+					 update.setString(14, beanUsuario.getFotoBase64());
+					 update.setString(15, beanUsuario.getContentType());				 
 				 }
 				 
 				 if (beanUsuario.isAtualizarPDF() && !beanUsuario.isAtualizarImagem()) {
-					 update.setString(13, beanUsuario.getCurriculoBase64());
-					 update.setString(14, beanUsuario.getContentTypeCurriculo());					 
+					 update.setString(14, beanUsuario.getCurriculoBase64());
+					 update.setString(15, beanUsuario.getContentTypeCurriculo());					 
 				 } 
 				 
 				 if (beanUsuario.isAtualizarImagem() && beanUsuario.isAtualizarPDF()) {
-					 update.setString(15, beanUsuario.getCurriculoBase64());
-					 update.setString(16, beanUsuario.getContentTypeCurriculo());
+					 update.setString(16, beanUsuario.getCurriculoBase64());
+					 update.setString(17, beanUsuario.getContentTypeCurriculo());
 				 }
 				 
 				 if (beanUsuario.isAtualizarImagem() && !beanUsuario.isAtualizarPDF()) {
-					 update.setString(15, beanUsuario.getFotoMiniaturaBase64());
+					 update.setString(16, beanUsuario.getFotoMiniaturaBase64());
 				 } else if (beanUsuario.isAtualizarImagem()) {
-					 update.setString(17, beanUsuario.getFotoMiniaturaBase64());
+					 update.setString(18, beanUsuario.getFotoMiniaturaBase64());
 				 }
 				 
 				 update.executeUpdate();

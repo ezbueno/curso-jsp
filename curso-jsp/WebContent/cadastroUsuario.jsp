@@ -111,11 +111,12 @@
 						<td id="user-ativo" style="width: 53px">Ativo:</td>
 						<td><input type="checkbox" name="ativo" id="ativo" ${user.ativo ? 'checked' : ''} />
 						
-						<td style="width: 294px"></td>
+												
+						<td style="width: 108px"></td>
 						<td id="sexo-user" style="width: 67px">Sexo:</td>
 						<td>
-							<input type="radio" name="sexo" value="masculino" ${user.sexo eq 'masculino' ? 'checked' : ''}/>Masculino
-							<input type="radio" name="sexo" value="feminino" ${user.sexo eq 'feminino' ? 'checked' : ''}/>Feminino
+							<input type="radio" name="sexo" value="masculino" ${user.sexo eq 'masculino' ? 'checked' : ''} />Masculino
+							<input type="radio" name="sexo" value="feminino" ${user.sexo eq 'feminino' ? 'checked' : ''} />Feminino
 						</td>
 							<%-- Outra maneira de comparar o sexo: 
 								if (request.getAttribute("user") != null) {
@@ -126,20 +127,47 @@
 										out.print(" ");
 									}
 								}
-							--%>			
+							--%>
+							
+						<td style="width: 103px"></td>
+						<td id="perfil-user" style="width: 67px">Perfil:</td>
+						<td>
+							<select id="perfil" name="perfil">
+								<option value="nao-informado">[--Selecione--]</option>
+								<option value="administrador" ${user.perfil eq 'administrador' ? 'selected' : ''}>Administrador(a)</option> 
+								<option value="diretor" ${user.perfil eq 'diretor' ? 'selected' : ''}>Diretor(a)</option>
+								<option value="gerente" ${user.perfil eq 'gerente' ? 'selected' : ''}>Gerente</option>
+								<option value="secretario" ${user.perfil eq 'secretario' ? 'selected' : ''}>Secretário(a)</option>
+							</select>
+						</td>			
 					</tr>
 				</table>
 				
 				<br>
 				
 				<div id="botao">
-					<input type="submit" value="Salvar" class="botaoEnviar" />
-					<input type="submit" value="Cancelar" onclick="document.getElementById('formUser').action='salvarUsuario?acao=reset'" class="botaoEnviar" />
+					<input type="submit" value="Salvar" class="botaoSalvar" />
+					<input type="submit" value="Cancelar" onclick="document.getElementById('formUser').action='salvarUsuario?acao=reset'" class="botaoCancelar" />
 				</div>
 			</li>
 		</ul>
 	</form>
-
+	
+	<form action="pesquisa" method="post">
+		<ul class="form-style-1">
+				<li>
+					<table class="">
+						<tr>
+							<td style="width: 160px"></td>
+							<td><strong>Descrição:</strong></td>
+							<td><input type="text" id="descricaoconsulta" name="descricaoconsulta" style="width: 300px" /></td>
+							<td class="form-style-2"><input type="submit" value="Pesquisar" class="botaoPesquisar" /></td>
+						</tr>						
+					</table>
+				</li>	
+		</ul>			
+	</form>	
+	
 	<table class="tabela-usuarios">
 	<caption><strong>Lista de Usuários</strong></caption>
 		<thead>

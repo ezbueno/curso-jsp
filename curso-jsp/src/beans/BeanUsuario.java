@@ -23,6 +23,7 @@ public class BeanUsuario {
 	private boolean atualizarPDF = true;
 	private boolean ativo;
 	private String sexo;
+	private String perfil;
 	
 	public Long getId() {
 		return id;
@@ -147,5 +148,11 @@ public class BeanUsuario {
 	}
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
+	}
+	public String getPerfil() {
+		return perfil;
+	}
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
 	}
 }
