@@ -41,28 +41,22 @@ public class Produto extends HttpServlet {
 			String acao = request.getParameter("acao");
 			String produto = request.getParameter("produto");
 			
+			RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
+			
 			if (acao != null && acao.equalsIgnoreCase("delete")) {
 				daoProduto.deletar(produto);
 				request.setAttribute("msgSalvarAtualizarExcluir", "Produto excluído com sucesso!");
-		
-				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listar());
-				view.forward(request, response);
 			} else if (acao != null && acao.equalsIgnoreCase("editar")) {
 				BeanProduto beanProduto = daoProduto.consultar(produto);
-								
-				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produto", beanProduto);
-				view.forward(request, response);
 			} else if (acao != null && acao.equalsIgnoreCase("listartodosprodutos")) {
-				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listar());
-				view.forward(request, response);
 			} else {
-				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listar());
-				view.forward(request, response);
-			}			
+			}
+			request.setAttribute("categorias", daoProduto.listarCategorias());
+			view.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -80,6 +74,7 @@ public class Produto extends HttpServlet {
 			try {
 				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listar());
+				request.setAttribute("categorias", daoProduto.listarCategorias());
 				view.forward(request, response);
 				
 			} catch (Exception e) {
@@ -90,10 +85,12 @@ public class Produto extends HttpServlet {
 			String nome = request.getParameter("nome");
 			String quantidade = request.getParameter("quantidade");
 			String valor = request.getParameter("valor");
+			String categoria = request.getParameter("categoria_id");
 						
 			BeanProduto beanProduto = new BeanProduto();
 			beanProduto.setId(!id.isEmpty() ? Long.parseLong(id) : null);
 			beanProduto.setNome(nome);
+			beanProduto.setCategoria_id(Long.parseLong(categoria));
 			
 			if (quantidade != null && !quantidade.isEmpty() ) {
 				beanProduto.setQuantidade(Double.parseDouble(quantidade));
@@ -138,6 +135,7 @@ public class Produto extends HttpServlet {
 				
 				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listar());
+				request.setAttribute("categorias", daoProduto.listarCategorias());
 				view.forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -75,7 +75,24 @@
 							<td><input type="text" id="valor" name="valor"
 								value="<fmt:formatNumber value="${produto.valor}"></fmt:formatNumber>" maxlength="10" class="field-long"></td>
 							</c:if>
-					</tr>					
+					</tr>
+					
+					<tr>
+						<td>Categoria:</td>
+						<td>
+							<select id="categorias" name="categoria_id" class="field-long">
+								<c:forEach items="${categorias}" var="cat">
+									<option id="${cat.id}" value="${cat.id}"
+										<c:if test="${cat.id == produto.categoria_id}">
+											<c:out value="selected=selected"></c:out>
+										</c:if>
+									>
+										${cat.nome}
+									</option>
+								</c:forEach>
+							</select>
+						</td>
+					</tr>				
 										
 					<tr>
 						<td></td>
